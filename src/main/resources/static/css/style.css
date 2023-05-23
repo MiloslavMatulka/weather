@@ -1,0 +1,9 @@
+table, th, td {
+    padding: .5em;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+th {
+    background-color: whitesmoke;
+}

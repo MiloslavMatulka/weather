@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div align="center">
+  <h1>Weather today hourly</h1>
+  <a th:href="@{/}">Home</a>
+  <hr>
+
+  <table>
+    <tr>
+      <th>Time (iso8601)</th>
+      <th>Temperature 2m (°C)</th>
+      <th>Precipitation (mm)</th>
+      <th>Precipitation probability (%)</th>
+      <th>Relative humidity 2m (%)</th>
+      <th>Wind speed 10m (km/h)</th>
+      <th>UV index</th>
+    </tr>
+
+    <tr th:each="weather:${weatherHourly}">
+      <td th:text="${weather.time}"></td>
+      <td>
+        <span th:if="${weather.temperature2m >= 25.0}" th:text="${weather.temperature2m}" style="color: red"></span>
+        <span th:if="${weather.temperature2m > 0.0 and weather.temperature2m < 25.0}" th:text="${weather.temperature2m}" style="color: inherit"></span>
+        <span th:if="${weather.temperature2m <= 0.0}" th:text="${weather.temperature2m}" style="color: blue"></span>
+      </td>
+      <td>
+        <span th:if="${weather.precipitation >= 5.0}" th:text="${weather.precipitation}" style="color: red"></span>
+        <span th:unless="${weather.precipitation >= 5.0}" th:text="${weather.precipitation}" style="color: inherit"></span>
+      </td>
+      <td>
+        <span th:if="${weather.precipitationProbability >= 70}" th:text="${weather.precipitationProbability}" style="color: red"></span>
+        <span th:unless="${weather.precipitationProbability >= 70}" th:text="${weather.precipitationProbability}" style="color: inherit"></span>
+      </td>
+      <td>
+        <span th:if="${weather.relativeHumidity2m <= 20}" th:text="${weather.relativeHumidity2m}" style="color: red"></span>
+        <span th:unless="${weather.relativeHumidity2m <= 20}" th:text="${weather.relativeHumidity2m}" style="color: inherit"></span>
+      </td>
+      <td>
+        <span th:if="${weather.windSpeed10m >= 50.0}" th:text="${weather.windSpeed10m}" style="color: red"></span>
+        <span th:unless="${weather.windSpeed10m >= 50.0}" th:text="${weather.windSpeed10m}" style="color: inherit"></span>
+      </td>
+      <td>
+        <span th:if="${weather.uvIndex >= 6.0}" th:text="${weather.uvIndex}" style="color: red"></span>
+        <span th:unless="${weather.uvIndex >= 6.0}" th:text="${weather.uvIndex}" style="color: inherit"></span>
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+  <a th:href="@{/}">Home</a>
+</div>
+</body>
+</html>
