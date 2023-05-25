@@ -2,8 +2,9 @@ package com.example.weather.config;
 
 import com.example.weather.controller.WeatherDailyController;
 import com.example.weather.controller.WeatherHourlyController;
-
 import com.example.weather.controller.WeatherTestController;
+import com.example.weather.exception.GlobalExceptionHandler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,7 @@ public class WeatherConfig {
 
     @Bean
     public Logger logger() {
-        return LoggerFactory.getLogger(WeatherDailyController.class);
+        return LoggerFactory.getLogger(GlobalExceptionHandler.class);
     }
 
     @Bean

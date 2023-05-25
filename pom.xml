@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>weather</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<name>weather</name>
 	<description>Spring Boot app calling external weather API</description>
 	<properties>
