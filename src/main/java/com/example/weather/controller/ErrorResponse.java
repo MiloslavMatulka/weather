@@ -15,4 +15,5 @@ public class ErrorResponse {
     private String message;
     private StackTraceElement[] stackTrace;
     private LocalDateTime timestamp;
+
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface WeatherHourlyService {
 
     List<WeatherHourly> getWeatherHourly();
+
 }

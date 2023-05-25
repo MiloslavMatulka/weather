@@ -4,7 +4,6 @@ import com.example.weather.model.WeatherDaily;
 
 import lombok.AllArgsConstructor;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,57 +29,24 @@ public class WeatherDailyServiceImpl implements WeatherDailyService {
         JSONObject json = new JSONObject(forecast);
         JSONObject daily = (JSONObject) json.get("daily");
 
-        // Precipitation probability mean units: %
-        JSONArray precipitationProbabilityMean =
-                (JSONArray) daily.get("precipitation_probability_mean");
         List<Integer> precipitationProbabilityMeanList =
-                JsonTools.convertToList(precipitationProbabilityMean);
-
-        // Precipitation units: mm
-        JSONArray precipitationSum =
-                (JSONArray) daily.get("precipitation_sum");
+                JSONTools.getList(daily, "precipitation_probability_mean");
         List<BigDecimal> precipitationSumList =
-                JsonTools.convertToList(precipitationSum);
-
-        // Sunrise units: iso8601
-        JSONArray sunrise =
-                (JSONArray) daily.get("sunrise");
-        List<String> sunriseList = JsonTools.convertToList(sunrise);
-
-        // Sunset units: iso8601
-        JSONArray sunset =
-                (JSONArray) daily.get("sunset");
-        List<String> sunsetList = JsonTools.convertToList(sunset);
-
-        // Temperature units: °C
-        JSONArray temperature2mMax =
-                (JSONArray) daily.get("temperature_2m_max");
+                JSONTools.getList(daily, "precipitation_sum");
+        List<String> sunriseList = JSONTools.getList(daily, "sunrise");
+        List<String> sunsetList = JSONTools.getList(daily, "sunset");
         List<BigDecimal> temperature2mMaxList =
-                JsonTools.convertToList(temperature2mMax);
-
-        // Temperature units: °C
-        JSONArray temperature2mMin =
-                (JSONArray) daily.get("temperature_2m_min");
+                JSONTools.getList(daily, "temperature_2m_max");
         List<BigDecimal> temperature2mMinList =
-                JsonTools.convertToList(temperature2mMin);
-
-        // Time units: iso8601
-        JSONArray time = (JSONArray) daily.get("time");
-        List<String> timeList = JsonTools.convertToList(time);
-
-        // UV index units: none
-        JSONArray uvIndexMax =
-                (JSONArray) daily.get("uv_index_max");
-        List<BigDecimal> uvIndexMaxList = JsonTools.convertToList(uvIndexMax);
-
-        // Wind speed units: km/h
-        JSONArray windSpeed10mMax =
-                (JSONArray) daily.get("windspeed_10m_max");
+                JSONTools.getList(daily, "temperature_2m_min");
+        List<String> timeList = JSONTools.getList(daily, "time");
+        List<BigDecimal> uvIndexMaxList =
+                JSONTools.getList(daily, "uv_index_max");
         List<BigDecimal> windSpeed10mMaxList =
-                JsonTools.convertToList(windSpeed10mMax);
+                JSONTools.getList(daily, "windspeed_10m_max");
 
         List<WeatherDaily> weatherDailyList = new ArrayList<>();
-        for (int i = 0; i < time.length(); ++i) {
+        for (int i = 0; i < timeList.size(); ++i) {
             weatherDailyList.add(new WeatherDaily(
                     precipitationProbabilityMeanList.get(i),
                     precipitationSumList.get(i),
@@ -96,4 +62,5 @@ public class WeatherDailyServiceImpl implements WeatherDailyService {
 
         return weatherDailyList;
     }
+
 }

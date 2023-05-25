@@ -20,4 +20,5 @@ public class WeatherDaily {
     private String time;
     private BigDecimal uvIndexMax;
     private BigDecimal windSpeed10mMax;
+
 }

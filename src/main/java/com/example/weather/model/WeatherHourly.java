@@ -18,4 +18,5 @@ public class WeatherHourly {
     private String time;
     private BigDecimal uvIndex;
     private BigDecimal windSpeed10m;
+
 }

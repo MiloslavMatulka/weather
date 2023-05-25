@@ -1,7 +1,9 @@
 package com.example.weather.config;
 
+import com.example.weather.controller.WeatherDailyController;
 import com.example.weather.controller.WeatherHourlyController;
 
+import com.example.weather.controller.WeatherTestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +17,22 @@ public class WeatherConfig {
 
     @Bean
     public Logger logger() {
+        return LoggerFactory.getLogger(WeatherDailyController.class);
+    }
+
+    @Bean
+    public Logger loggerDaily() {
+        return LoggerFactory.getLogger(WeatherDailyController.class);
+    }
+
+    @Bean
+    public Logger loggerHourly() {
         return LoggerFactory.getLogger(WeatherHourlyController.class);
+    }
+
+    @Bean
+    public Logger loggerTest() {
+        return LoggerFactory.getLogger(WeatherTestController.class);
     }
 
     @Bean
@@ -27,4 +44,5 @@ public class WeatherConfig {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
+
 }
