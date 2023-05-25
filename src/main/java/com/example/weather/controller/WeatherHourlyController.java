@@ -5,23 +5,16 @@ import com.example.weather.service.WeatherHourlyService;
 import org.slf4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.time.LocalDateTime;
 
 @Controller
 public class WeatherHourlyController {
 
     @Autowired
-    private Logger logger;
+    private Logger loggerHourly;
 
-    @Autowired
-    private String nameOfAuthor;
     private final WeatherHourlyService weatherHourlyService;
 
     public WeatherHourlyController(
@@ -29,19 +22,12 @@ public class WeatherHourlyController {
         weatherHourlyService = weatherHourlyServiceImpl;
     }
 
-    @GetMapping("/hourly")
+    @GetMapping("/today")
     public String getWeatherHourly(Model model) {
+        loggerHourly.info("Getting hourly weather");
         model.addAttribute("weatherHourly",
                 weatherHourlyService.getWeatherHourly());
-        logger.info("Viewing weather hourly");
-        return "hourly";
+        return "today";
     }
 
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handlerException(Exception e) {
-        return new ErrorResponse(nameOfAuthor, e.getLocalizedMessage(),
-                e.getStackTrace(), LocalDateTime.now());
-    }
 }
