@@ -1,4 +1,4 @@
-package com.example.weather.controller;
+package com.example.weather.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ErrorResponse {
 
+    private LocalDateTime timestamp;
     private String author;
     private String message;
+    private String description;
     private StackTraceElement[] stackTrace;
-    private LocalDateTime timestamp;
 
 }
